@@ -1,6 +1,6 @@
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements.  See the NOTICE file distributed withAssertions.assertTrue(
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -218,12 +218,12 @@ public class CheckpointStorageRetentionPruneTest extends AbstractSeaTunnelServer
                             // deletes the oldest max-retained entries in the same synchronized
                             // call, so the number of files must never exceed that bound.
                             Assertions.assertTrue(
-                                    onDisk.size() <= 2 * maxRetained,
-                                    "checkpoint files accumulate beyond the retention bound in "
-                                            + jobCheckpointDir
-                                            + ": "
-                                            + onDisk);
-                        });
+                            onDisk.size() <= maxRetained + 1,
+                            "checkpoint files accumulate beyond the retention bound in "
+                                    + jobCheckpointDir
+                                    + ": "
+                                    + onDisk);
+                                            });
 
         jobMaster.cancelJob();
         await().atMost(120000, TimeUnit.MILLISECONDS)
